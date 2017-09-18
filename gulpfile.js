@@ -10,6 +10,15 @@ var gulp = require('gulp'),
     imagemin = require('gulp-imagemin'), //optimize images
     cache = require('gulp-cache'), //caches images so that minified images dont get reprocessed
     bs = require('browser-sync').create();
+    deploy = require('gulp-gh-pages');
+
+/**
+ * Push build to gh-pages
+ */
+gulp.task('deploy', function () {
+  return gulp.src("./dist/**/*")
+    .pipe(deploy())
+});
 
 // SASS
 
@@ -76,5 +85,13 @@ gulp.task('watch', ['browser-sync'], function() {
     gulp.watch(jsSrc, ['js']);
 });
 
+
+/**
+ * Push build to gh-pages
+ */
+gulp.task('deploy', function () {
+  return gulp.src("./public/**/*")
+    .pipe(deploy())
+});
 
 gulp.task('default', ['css', 'js', 'watch']);
