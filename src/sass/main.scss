@@ -289,6 +289,72 @@ body {
   -webkit-backface-visibility: hidden;
   backface-visibility: hidden;
   font-family: helvetica;
+
+  &.horizontal {
+    position: static;
+    main {
+      position: static;
+      width: auto;
+      height: auto;
+      padding-bottom: 150px;
+      .mail-container {
+        left: 45px;
+        bottom: 20px;
+      }
+      .phone-container {
+        right: 45px;
+        top: auto;
+        bottom: 20px;
+        left: auto;
+      }
+    }
+    section {
+      display: block;
+      height: auto;
+      width: 100%;
+      position: static;
+      &.header {
+        height: 60vh;
+        position: relative;
+        .vertical-wrapper {
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+        }
+      }
+      &.form {
+        margin: 0;
+        position: relative;
+        height: 300px;
+        @media (max-width: 600px) {
+          height: 400px;
+        }
+        .vertical-wrapper {
+          height: 300px;
+          width: 80%;
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          @media (max-width: 600px) {
+            height: 400px;
+          }
+          form {
+            margin: 70px 30px;
+          }
+        }
+      }
+      .vertical-wrapper {
+        position: static;
+        top: auto;
+        left: auto;
+        transform: none;
+      }
+
+
+    }
+  }
 }
 
 * {

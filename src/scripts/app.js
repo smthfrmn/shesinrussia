@@ -2,24 +2,32 @@ var move = 0;
 var width = $('main').width() - ($('section').outerWidth() * 2);
 var speed = .5;
 
-$('html').on('mousewheel', function (e) {
 
-    var delta = e.originalEvent.wheelDelta;
-    var scrollTo = (e.originalEvent.wheelDelta * -1);
-    if (delta < 0) {
-       move += speed * scrollTo;
-       if (move > width) {
-         move = width;
-       }
-    } else if (delta > 0) {
-       move -= speed * delta;
-       if (move < 0) {
-         move = 0;
-       }
-    }
-    document.documentElement.style.overflow = 'hidden';
-    $( "main" ).css( "transform", "translate3d(-" + move + "px, 0px, 0px)", "width", width );
-});
+
+setTimeout(function(){
+  if ((screen.width < 1025) || (screen.height < 480)) {
+    $('body').addClass('horizontal');
+  } else {
+    $('html').on('mousewheel', function (e) {
+
+        var delta = e.originalEvent.wheelDelta;
+        var scrollTo = (e.originalEvent.wheelDelta * -1);
+        if (delta < 0) {
+           move += speed * scrollTo;
+           if (move > width) {
+             move = width;
+           }
+        } else if (delta > 0) {
+           move -= speed * delta;
+           if (move < 0) {
+             move = 0;
+           }
+        }
+        document.documentElement.style.overflow = 'hidden';
+        $( "main" ).css( "transform", "translate3d(-" + move + "px, 0px, 0px)", "width", width );
+    });
+  }
+}, 100);
 
 function updateCircle() {
   //Manages updating the circle's text and size.
