@@ -23,7 +23,7 @@ gulp.task('deploy', function () {
 // SASS
 
 var sassSrc = ['src/sass/*.scss'],
-    sassDist = ['public/css'];
+    sassDist = ['docs/css'];
 
 gulp.task('css', function() {
     var processors = [
@@ -39,7 +39,7 @@ gulp.task('css', function() {
         .pipe(sass(sassOptions))
         .pipe(postcss(processors))
         .pipe(sourcemaps.write('./maps'))
-        .pipe(gulp.dest('public/css'))
+        .pipe(gulp.dest('docs/css'))
         .pipe(bs.reload({
             stream: true
         }));
@@ -48,13 +48,13 @@ gulp.task('css', function() {
 // JAVASCRIPT
 
 var jsSrc = ['src/scripts/*.js'],
-    jsDist = ['public/js'];
+    jsDist = ['docs/js'];
 
 gulp.task('js', function() {
     gulp.src(jsSrc)
         .pipe(concat('script.js'))
         .pipe(uglify())
-        .pipe(gulp.dest('public/js'));
+        .pipe(gulp.dest('docs/js'));
 });
 
 // ASSETS
@@ -65,7 +65,7 @@ gulp.task('images', function() {
             interlaced: true
         })))
         .pipe(imagemin())
-        .pipe(gulp.dest('public/img'))
+        .pipe(gulp.dest('docs/img'))
 });
 
 // LIVE RELOAD
@@ -73,7 +73,7 @@ gulp.task('images', function() {
 gulp.task('browser-sync', function() {
     bs.init({
         server: {
-            baseDir: 'public'
+            baseDir: 'docs'
         }
     })
 });
@@ -90,7 +90,7 @@ gulp.task('watch', ['browser-sync'], function() {
  * Push build to gh-pages
  */
 gulp.task('deploy', function () {
-  return gulp.src("./public/**/*")
+  return gulp.src("./docs/**/*")
     .pipe(deploy())
 });
 
